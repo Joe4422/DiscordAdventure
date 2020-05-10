@@ -3,18 +3,34 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29920.165
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscordZMachine", "DiscordZMachine\DiscordZMachine.csproj", "{60658BD0-FAC3-49D8-A340-CC47A7FF88F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiscordZMachine", "DiscordZMachine\DiscordZMachine.csproj", "{60658BD0-FAC3-49D8-A340-CC47A7FF88F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZeddSharp", "ZeddSharp\ZeddSharp.csproj", "{D95C3C91-BCFC-4996-9118-69F840157AD2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{60658BD0-FAC3-49D8-A340-CC47A7FF88F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{60658BD0-FAC3-49D8-A340-CC47A7FF88F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60658BD0-FAC3-49D8-A340-CC47A7FF88F3}.Debug|x86.ActiveCfg = Debug|x86
+		{60658BD0-FAC3-49D8-A340-CC47A7FF88F3}.Debug|x86.Build.0 = Debug|x86
 		{60658BD0-FAC3-49D8-A340-CC47A7FF88F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60658BD0-FAC3-49D8-A340-CC47A7FF88F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60658BD0-FAC3-49D8-A340-CC47A7FF88F3}.Release|x86.ActiveCfg = Release|x86
+		{60658BD0-FAC3-49D8-A340-CC47A7FF88F3}.Release|x86.Build.0 = Release|x86
+		{D95C3C91-BCFC-4996-9118-69F840157AD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D95C3C91-BCFC-4996-9118-69F840157AD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D95C3C91-BCFC-4996-9118-69F840157AD2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D95C3C91-BCFC-4996-9118-69F840157AD2}.Debug|x86.Build.0 = Debug|Any CPU
+		{D95C3C91-BCFC-4996-9118-69F840157AD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D95C3C91-BCFC-4996-9118-69F840157AD2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D95C3C91-BCFC-4996-9118-69F840157AD2}.Release|x86.ActiveCfg = Release|Any CPU
+		{D95C3C91-BCFC-4996-9118-69F840157AD2}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

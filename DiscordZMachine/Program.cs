@@ -6,7 +6,6 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using ZMachineLib;
 
 namespace DiscordZMachine
 {
@@ -57,9 +56,6 @@ namespace DiscordZMachine
                         case "up":
                             IsUp(message.Channel);
                             break;
-                        case "quit":
-                            QuitGame(message.Channel);
-                            break;
                     }
                 }
                 else
@@ -75,7 +71,7 @@ namespace DiscordZMachine
         private void ListGames(ISocketMessageChannel channel)
         {
             string output = "Available games are:\n";
-            foreach (string s in Directory.GetFiles(Directory.GetCurrentDirectory()).Where((x) => x.ToLower().EndsWith(".dat") == true))
+            foreach (string s in Directory.GetFiles(Directory.GetCurrentDirectory()).Where((x) => x.ToLower().EndsWith(".dat") || x.ToLower().Contains(".z")))
             {
                 output += " • " + Path.GetFileName(s) + "\n";
             }
@@ -102,6 +98,7 @@ namespace DiscordZMachine
                     {
                         GameInstanceManager.CreateInstanceResult.Fail_Exists => "An instance is already running in this channel!",
                         GameInstanceManager.CreateInstanceResult.Fail_InstanceLimit => "There are too many instances already running! Try again later.",
+                        GameInstanceManager.CreateInstanceResult.Fail_IOError => "Error opening file! Please try a different one.",
                         GameInstanceManager.CreateInstanceResult.Success => null,
                         _ => throw new InvalidEnumArgumentException("Invalid enum member passed.")
                     });
@@ -111,17 +108,6 @@ namespace DiscordZMachine
                     message.Channel.SendMessageAsync("That game does not exist!");
                 }
             }
-        }
-
-        private void QuitGame(ISocketMessageChannel messageChannel)
-        {
-            GameInstanceManager.DestroyInstanceResult result = gameInstanceManager.DestroyInstance(messageChannel);
-            messageChannel.SendMessageAsync(result switch
-            {
-                GameInstanceManager.DestroyInstanceResult.Fail_NoSuchInstance => "There is no instance running in this channel!",
-                GameInstanceManager.DestroyInstanceResult.Success => "Instance closed successfully.",
-                _ => throw new InvalidEnumArgumentException("Invalid enum member passed.")
-            });
         }
 
         private void IsUp(ISocketMessageChannel messageChannel)

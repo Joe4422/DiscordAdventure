@@ -12,12 +12,8 @@ namespace DiscordZMachine
         {
             Success,
             Fail_Exists,
-            Fail_InstanceLimit
-        }
-        public enum DestroyInstanceResult
-        {
-            Success,
-            Fail_NoSuchInstance
+            Fail_InstanceLimit,
+            Fail_IOError
         }
 
         private Dictionary<ISocketMessageChannel, GameInstance> instances;
@@ -43,25 +39,9 @@ namespace DiscordZMachine
             }
             else
             {
-                instances.Add(messageChannel, new GameInstance(messageChannel));
-                instances[messageChannel].Start(gameFile);
+                instances.Add(messageChannel, new GameInstance(gameFile, messageChannel));
+                instances[messageChannel].Start();
                 return CreateInstanceResult.Success;
-            }
-        }
-
-        public DestroyInstanceResult DestroyInstance(ISocketMessageChannel messageChannel)
-        {
-            bool instanceExists = instances.TryGetValue(messageChannel, out GameInstance instance);
-
-            if (!instanceExists)
-            {
-                return DestroyInstanceResult.Fail_NoSuchInstance;
-            }
-            else
-            {
-                instance.Stop();
-                instances.Remove(messageChannel);
-                return DestroyInstanceResult.Success;
             }
         }
 

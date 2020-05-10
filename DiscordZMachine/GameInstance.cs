@@ -7,7 +7,6 @@ using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using ZMachineLib;
 
 namespace DiscordZMachine
 {
@@ -18,28 +17,28 @@ namespace DiscordZMachine
         private Thread zMachineThread;
         private ISocketMessageChannel channel;
 
-        public GameInstance(ISocketMessageChannel channel)
+        public GameInstance(Stream gameStream, ISocketMessageChannel channel)
         {
             this.channel = channel;
             console = new DiscordConsole(channel);
-            zMachine = new ZMachine(console);
+            zMachine = new ZMachine(gameStream, console);
         }
 
-        public void Start(FileStream file)
+        public bool Start()
         {
-            zMachine.LoadFile(file);
-            zMachineThread = new Thread(() => zMachine.Run());
-            zMachineThread.Name = channel.Id.ToString();
-            zMachineThread.Start();
+            try
+            {
+                zMachineThread = new Thread(() => zMachine.Run());
+                zMachineThread.Name = channel.Id.ToString();
+                zMachineThread.Start();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public void EnqueueIncomingMessage(string message) => console.EnqueueIncomingMessage(message);
-
-        public void Save() => zMachine.SaveState();
-
-        public void Stop()
-        {
-            zMachineThread.Interrupt();
-        }
     }
 }
